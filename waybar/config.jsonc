@@ -1,0 +1,117 @@
+// -*- mode: jsonc -*-
+{
+	"layer":"top",
+	"position":"bottom",
+	"height":34,
+	"spacing":2,
+	"modules-left":["custom/cpu-temp","custom/coolant-temp","custom/gpu-temp","mpris"],
+	"modules-center":["wlr/taskbar"],
+	"modules-right":["idle_inhibitor","wireplumber#out","wireplumber#in","network","power-profiles-daemon","cpu","memory","clock","tray","custom/power"],
+	"custom/cpu-temp": {
+		"exec": "sensors | awk '/Tctl:/ {printf \"%.1f\", $2}'",
+		"format": "{}°C ",
+		"interval": 3,
+		"tooltip": false
+	},
+	"custom/coolant-temp": {
+		"exec": "sensors | awk '/Coolant temp:/ {gsub(/[^0-9.]/,\"\",$3); print $3}'",
+		"format": "{}°C 󰖏",
+		"interval": 3,
+		"tooltip": false
+	},
+	"custom/gpu-temp": {
+		"exec": "sensors | awk '/edge:/ || /GPU:/ {printf \"%.1f\", $2}'",
+		"format": "{}°C ",
+		"interval": 3,
+		"tooltip": false
+	},
+	"mpris": {
+		"format": "➤ {title}",
+		"format-paused": "⏸ <i>{title}</i>",
+		"interval": 3,
+		"player": "audacious"
+	},
+	"idle_inhibitor": {
+		"format": "{icon}",
+		"format-icons": {
+			"activated": "👁",
+			"deactivated": "⏾"
+		}
+	},
+	"wireplumber#out": {
+		"format": "{volume}% {icon}",
+		"format-muted": "{volume}% 🔇",
+		"format-icons": ["🔈","🔉","🔊"],
+		"on-click": "pavucontrol",
+		"on-click-right": "wpctl set-mute @DEFAULT_SINK@ toggle",
+		"scroll-step": 5
+	},
+	"wireplumber#in": {
+		"node-type": "Audio/Source",
+		"format": "{volume}% ",
+		"format-muted": "{volume}% ",
+		"on-click-right": "wpctl set-mute @DEFAULT_SOURCE@ toggle",
+		"scroll-step": 5
+	},
+	"wlr/taskbar": {
+		"icon-theme": ["Mint-Y-Aqua","oxygen"],
+		"on-click": "minimize-raise",
+		"on-click-right": "close"
+	},
+	"tray": {
+		"icon-size": 22,
+		"spacing": 2
+	},
+	"clock": {
+		"format": "{:%I:%M%p}",
+		"tooltip-format": "<span size='x-large'><tt>{calendar}</tt></span>",
+		"format-alt": "{:%Y-%m-%d}",
+		"calendar": {
+			"format": {
+				"today": "<span color='#ffcc66'><b><u>{}</u></b></span>",
+				"days": "{}"
+			}
+		}
+	},
+	"cpu": {
+		"format": "{usage}% ",
+		"tooltip": false,
+		"on-click": "qps",
+		"interval": 3
+	},
+	"memory": {
+		"format": "{percentage}% ",
+		"tooltip-format": "RAM {used:0.1f}GiB used\nSWAP {swapUsed:0.1f}GiB used",
+		"interval": 3
+	},
+	"power-profiles-daemon": {
+	  "format": "{icon}",
+	  "tooltip-format": "Power profile: {profile}\nCPU driver: {cpu_driver}\nPlatform driver: {platform_driver}",
+	  "tooltip": true,
+	  "format-icons": {
+		"default": "",
+		"performance": "",
+		"balanced": "",
+		"power-saver": ""
+	  }
+	},
+	"network": {
+		"on-click": "nm-connection-editor",
+		"format-ethernet": "{ipaddr}/{cidr} 🔲",
+		"tooltip-format": "{ifname} via {gwaddr} 🔲",
+		"format-linked": "{ifname} (No IP) ⛔",
+		"format-disconnected": "Disconnected ⛔"
+	},
+	"custom/power": {
+		"format" : "⏻ ",
+		"tooltip": true,
+		"tooltip-format": "Power Menu",
+		"menu": "on-click",
+		"menu-file": "$HOME/.config/waybar/power_menu.xml",
+		"menu-actions": {
+			"reboot": "systemctl reboot",
+			"soft-reboot": "systemctl soft-reboot",
+			"shutdown": "systemctl poweroff",
+		}
+	}
+}

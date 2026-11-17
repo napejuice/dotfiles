@@ -1,0 +1,16 @@
+actions=0
+max-visible=5
+layer=overlay
+background-color=#3a82c8e6
+text-color=#ffffff
+border-color=#ffffff59
+border-radius=5
+max-icon-size=48
+default-timeout=5000
+ignore-timeout=1
+anchor=bottom-right
+margin=20
+outer-margin=0,15,15,0
+output=DP-1
+on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
+font=Segoe UI Variable Text 11

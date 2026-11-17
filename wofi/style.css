@@ -1,0 +1,81 @@
+/* Windows 7 Aero-inspired wofi style.css
+ * Matches the Waybar theme (glassy blue, Segoe UI Variable).
+ * Background set to ~90% transparency.
+ */
+
+@define-color aero-blue-light rgba(116, 184, 252, 0.90);
+@define-color aero-blue-mid   rgba(58, 130, 200, 0.90);
+@define-color aero-blue-dark  rgba(30, 90, 160, 0.90);
+@define-color glass-highlight rgba(255, 255, 255, 0.40);
+@define-color text            #ffffff;
+@define-color text-dim        rgba(255, 255, 255, 0.75);
+@define-color selected        rgba(255, 255, 255, 0.22);
+
+window {
+	background: linear-gradient(
+		to bottom,
+		@aero-blue-light,
+		@aero-blue-mid 40%,
+		@aero-blue-dark
+	);
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	border-radius: 6px;
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.4),
+		0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+#input {
+	background: rgba(0, 0, 0, 0.25);
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	border-radius: 4px;
+	margin: 8px;
+	padding: 6px 10px;
+	color: @text;
+	font-family: "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", "Symbols Nerd Font Mono", sans-serif;
+	font-size: 14px;
+}
+
+#input:focus {
+	border-color: rgba(255, 255, 255, 0.5);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+#outer-box {
+	margin: 4px;
+}
+
+#inner-box {
+	margin: 4px;
+	border-radius: 4px;
+}
+
+#entry {
+	padding: 6px 10px;
+	margin: 2px 4px;
+	border-radius: 3px;
+	background: transparent;
+	color: @text-dim;
+	font-family: "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", "Symbols Nerd Font Mono", sans-serif;
+	font-size: 13px;
+}
+
+#entry:selected {
+	background: @selected;
+	color: @text;
+	box-shadow: inset 0 1px 0 @glass-highlight;
+	border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+#text {
+	color: inherit;
+}
+
+#img {
+	margin-right: 8px;
+}
+
+/* Optional: slight hover on non-selected entries */
+#entry:hover:not(:selected) {
+	background: rgba(255, 255, 255, 0.08);
+}

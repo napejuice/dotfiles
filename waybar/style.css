@@ -1,0 +1,156 @@
+/* Windows 7 Aero-inspired Waybar style.css
+ * Tuned for the modules in the current config.
+ * LabWC: no native blur — uses transparency + glass highlights.
+ * Font: Segoe UI Variable + Nerd Fonts symbols.
+ */
+
+@define-color aero-blue-light rgba(116, 184, 252, 0.55);
+@define-color aero-blue-mid   rgba(58, 130, 200, 0.60);
+@define-color aero-blue-dark  rgba(30, 90, 160, 0.65);
+@define-color glass-highlight rgba(255, 255, 255, 0.45);
+@define-color glass-border    rgba(255, 255, 255, 0.35);
+@define-color text            #ffffff;
+@define-color hover-bg        rgba(255, 255, 255, 0.22);
+
+* {
+	border: none;
+	border-radius: 0;
+	font-family: "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI", "Symbols Nerd Font Mono", "Nerd Fonts", sans-serif;
+	font-size: 13px;
+	font-weight: 500;
+	min-height: 0;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+window#waybar {
+	background: linear-gradient(
+		to bottom,
+		@aero-blue-light,
+		@aero-blue-mid 35%,
+		@aero-blue-dark
+	);
+	color: @text;
+	border-top: 1px solid rgba(255, 255, 255, 0.55);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.45);
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.45),
+		inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+tooltip {
+	background: rgba(20, 40, 70, 0.92);
+	border: 1px solid rgba(255, 255, 255, 0.25);
+	border-radius: 4px;
+	color: @text;
+}
+
+tooltip label {
+	color: @text;
+}
+
+/* Modules used in config */
+#keyboard-state,
+#mpris,
+#idle_inhibitor,
+#wireplumber,
+#network,
+#power-profiles-daemon,
+#cpu,
+#memory,
+#clock,
+#tray,
+#custom-power {
+	padding: 0 8px;
+	margin: 2px 1px;
+	border-radius: 3px;
+	color: @text;
+	transition: background 0.12s ease;
+}
+
+#keyboard-state:hover,
+#mpris:hover,
+#idle_inhibitor:hover,
+#wireplumber:hover,
+#network:hover,
+#power-profiles-daemon:hover,
+#cpu:hover,
+#memory:hover,
+#clock:hover,
+#tray:hover,
+#custom-power:hover {
+	background: @hover-bg;
+	box-shadow: inset 0 1px 0 @glass-highlight;
+}
+
+/* Taskbar */
+#taskbar button {
+	padding: 0 6px;
+	margin: 2px 1px;
+	border-radius: 3px;
+	background: transparent;
+	color: @text;
+	transition: background 0.12s ease;
+}
+
+#taskbar button:hover {
+	background: @hover-bg;
+	box-shadow: inset 0 1px 0 @glass-highlight;
+}
+
+#taskbar button.active {
+	background: rgba(255, 255, 255, 0.18);
+	box-shadow: inset 0 1px 0 @glass-highlight;
+}
+
+/* Tray */
+#tray > .passive {
+	-gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+	background: rgba(255, 180, 0, 0.35);
+	border-radius: 3px;
+}
+
+/* Idle inhibitor states */
+#idle_inhibitor.activated {
+	color: #ffcc66;
+}
+
+/* Network states */
+#network.disconnected {
+	color: #ff6666;
+}
+
+/* Power profile accents */
+#power-profiles-daemon.performance {
+	color: #ffcc66;
+}
+
+#power-profiles-daemon.power-saver {
+	color: #99ccff;
+}
+
+/* Slightly denser like Win7 */
+.modules-left,
+.modules-center,
+.modules-right {
+	margin: 0 2px;
+}
+
+#custom-cpu-temp,
+#custom-coolant-temp,
+#custom-gpu-temp {
+	padding: 0 8px;
+	margin: 2px 1px;
+	border-radius: 3px;
+	color: @text;
+	transition: background 0.12s ease;
+}
+
+#custom-cpu-temp:hover,
+#custom-coolant-temp:hover,
+#custom-gpu-temp:hover {
+	background: @hover-bg;
+	box-shadow: inset 0 1px 0 @glass-highlight;
+}
